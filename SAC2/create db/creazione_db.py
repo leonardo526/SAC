@@ -7,7 +7,7 @@ connection = create_db_connection("utenti")
 utenti = """CREATE TABLE utenti(
             UsersID int PRIMARY KEY AUTO_INCREMENT,
             Gender varchar(15) CHECK (Gender = 'male' OR Gender = 'female' OR Gender = 'other'),
-            Age int CHECK (Age > 0 and < 120),
+            Age int CHECK (Age > 0 AND Age < 120),
             CAP varchar(6) NOT NULL,
             Work varchar(255) NOT NULL
             );"""
