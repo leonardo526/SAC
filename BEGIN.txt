@@ -1,0 +1,44 @@
+
+Average_rating DECIMAL(10,2)
+
+BEGIN
+DECLARE num_valutazioni INT;
+DECLARE somma_valutazioni FLOAT;
+
+    -- Calcola il numero totale delle valutazioni e la somma dei punteggi
+    SELECT COUNT(*), SUM(Rating)
+    INTO num_valutazioni, somma_valutazioni
+    FROM rating
+    WHERE FilmID = NEW.FilmID;
+
+    -- Calcola la nuova media delle valutazioni
+    SET @nuova_media = IF(num_valutazioni > 0, somma_valutazioni / num_valutazioni, 0);
+
+    -- Aggiorna la colonna media_valutazione nella tabella film
+    UPDATE film
+    SET film.Avg_rating = @nuova_media
+    WHERE FilmID = NEW.FilmID;
+END
+
+
+Age_groups varchar(45)
+
+CREATE TRIGGER Age_groups
+BEFORE INSERT
+ON utenti
+FOR EACH ROW
+BEGIN
+    IF utenti.Age < 18 THEN 
+        SET NEW.Age_groups = "under 18";
+    ELSEIF utenti.Age > 17 AND utenti.Age < 25 THEN
+        SET NEW.Age_groups = "18-24";
+    ELSEIF utenti.Age > 24 AND utenti.Age < 35 THEN 
+        SET NEW.Age_groups = "25-34";
+    ELSEIF utenti.Age > 34 AND utenti.Age < 45 THEN
+        SET NEW.Age_groups = "35-44";
+    ELSEIF utenti.Age > 44 AND utenti.Age < 55 THEN
+        SET NEW.Age_groups = "45-54";
+    ELSE
+        SET NEW.Age_groups = "over 55";
+    END IF;
+END;
