@@ -33,6 +33,7 @@ rating = """CREATE TABLE rating(
             UserID int,
             FilmID int,
             Rating int,
+            Timestamp int,
             FOREIGN KEY (UserID) REFERENCES utenti(UsersID) ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (FilmID) REFERENCES film(FilmID) ON DELETE CASCADE ON UPDATE CASCADE
             );"""

@@ -40,7 +40,7 @@ df = pd.read_csv("New_Elenco_Movies_Pulito.csv")
 
 for x in df.to_dict(orient="records"):
     c = create_db_connection('utenti')
-    q = f"""INSERT INTO film (Title,OriginalTitle,Year) VALUES ("{x['Title']}","{x['OriginalTitle']}",'{x['Year']}')"""
+    q = f"""INSERT INTO film (Title,OriginalTitle,Year) VALUES ("{x['Title']}","{x['Original Title']}",'{x['Year']}')"""
     execute_query(c,q)
     q = f"""SELECT FilmID FROM film WHERE Title = "{x['Title']}";"""
     resF = read_query(c,q)
