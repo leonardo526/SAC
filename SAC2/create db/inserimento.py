@@ -39,11 +39,9 @@ df = pd.read_csv("New_Elenco_Movies_Pulito.csv")
 
 
 for x in df.to_dict(orient="records"):
-    c = create_db_connection('utenti')
-    q = f"""INSERT INTO film (Title,OriginalTitle,Year) VALUES ("{x['Title']}","{x['Original Title']}",'{x['Year']}')"""
+    c = create_db_connection('Daitv12')
+    q = f"""INSERT INTO film (FilmID,Title,OriginalTitle,Year) VALUES ("{x['MovieID']}","{x['Title']}","{x['Original Title']}",'{x['Year']}')"""
     execute_query(c,q)
-    q = f"""SELECT FilmID FROM film WHERE Title = "{x['Title']}";"""
-    resF = read_query(c,q)
     #print(resF)
     for y in x['Genres'].split("|"):
         q = f"""SELECT GenreID FROM generi WHERE Genere = "{y}";"""
@@ -53,7 +51,7 @@ for x in df.to_dict(orient="records"):
             execute_query(c,q)
             q = f"""SELECT GenreID FROM generi WHERE Genere = "{y}";"""
             resG = read_query(c,q)
-        q = f"INSERT INTO generiRel (FilmID,GenreID) VALUES ('{resF[0]['FilmID']}','{resG[0]['GenreID']}')"
+        q = f"INSERT INTO generiRel (FilmID,GenreID) VALUES ('{x['MovieID']}','{resG[0]['GenreID']}')"
         execute_query(c,q)
         
     c.close()
@@ -67,5 +65,5 @@ for x in df.to_dict(orient="records"):
 
 
 
-    c.close()
+
 

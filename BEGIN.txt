@@ -1,11 +1,33 @@
-
-Average_rating DECIMAL(10,2)
-
+trigger1= """
+CREATE TRIGGER Age_groups
+AFTER INSERT
+ON utenti
+FOR EACH ROW
+BEGIN
+    IF utenti.Age < 18 THEN 
+        UPDATE utenti SET Age_groups = "under 18";
+    ELSEIF utenti.Age > 17 AND utenti.Age < 25 THEN
+        UPDATE utenti SET Age_groups = "18-24";
+    ELSEIF utenti.Age > 24 AND utenti.Age < 35 THEN 
+        UPDATE utenti SET Age_groups = "25-34";
+    ELSEIF utenti.Age > 34 AND utenti.Age < 45 THEN
+        UPDATE utenti SET Age_groups = "35-44";
+    ELSEIF utenti.Age > 44 AND utenti.Age < 55 THEN
+        UPDATE utenti SET Age_groups = "45-54";
+    ELSE
+        UPDATE utenti SET Age_groups = "over 55";
+    END IF;
+END;
+"""
+trigger2= """
+CREATE TRIGGER Average_rating
+AFTER INSERT 
+ON rating
+FOR EACH ROW
 BEGIN
 DECLARE num_valutazioni INT;
 DECLARE somma_valutazioni FLOAT;
-
-    -- Calcola il numero totale delle valutazioni e la somma dei punteggi
+     -- Calcola il numero totale delle valutazioni e la somma dei punteggi
     SELECT COUNT(*), SUM(Rating)
     INTO num_valutazioni, somma_valutazioni
     FROM rating
@@ -16,29 +38,9 @@ DECLARE somma_valutazioni FLOAT;
 
     -- Aggiorna la colonna media_valutazione nella tabella film
     UPDATE film
-    SET film.Avg_rating = @nuova_media
+    SET film.Average_rating = @nuova_media
     WHERE FilmID = NEW.FilmID;
-END
-
-
-Age_groups varchar(45)
-
-CREATE TRIGGER Age_groups
-BEFORE INSERT
-ON utenti
-FOR EACH ROW
-BEGIN
-    IF utenti.Age < 18 THEN 
-        SET NEW.Age_groups = "under 18";
-    ELSEIF utenti.Age > 17 AND utenti.Age < 25 THEN
-        SET NEW.Age_groups = "18-24";
-    ELSEIF utenti.Age > 24 AND utenti.Age < 35 THEN 
-        SET NEW.Age_groups = "25-34";
-    ELSEIF utenti.Age > 34 AND utenti.Age < 45 THEN
-        SET NEW.Age_groups = "35-44";
-    ELSEIF utenti.Age > 44 AND utenti.Age < 55 THEN
-        SET NEW.Age_groups = "45-54";
-    ELSE
-        SET NEW.Age_groups = "over 55";
-    END IF;
 END;
+"""
+execute_query(connection, trigger1)
+# execute_query(connection, trigger2)
