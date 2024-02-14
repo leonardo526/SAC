@@ -41,34 +41,33 @@ rating = """CREATE TABLE rating(
             FOREIGN KEY (FilmID) REFERENCES film(FilmID) ON DELETE CASCADE ON UPDATE CASCADE
             );"""
 
-# execute_query(connection, utenti)
-# execute_query(connection, film)
-# execute_query(connection, generi)
-# execute_query(connection, rating)
-# execute_query(connection, generiRel)
+execute_query(connection, utenti)
+execute_query(connection, film)
+execute_query(connection, generi)
+execute_query(connection, rating)
+execute_query(connection, generiRel)
 
-
-trigger1= """
-CREATE TRIGGER Age_groups
-AFTER INSERT
-ON utenti
+trigger1 = """
+CREATE TRIGGER utenti_after_insert
+BEFORE INSERT ON utenti
 FOR EACH ROW
 BEGIN
-    IF Age < 18 THEN 
-        UPDATE utenti SET Age_groups = "under 18";
-    ELSEIF utenti.Age > 17 AND utenti.Age < 25 THEN
-        UPDATE utenti SET Age_groups = "18-24";
-    ELSEIF utenti.Age > 24 AND utenti.Age < 35 THEN 
-        UPDATE utenti SET Age_groups = "25-34";
-    ELSEIF utenti.Age > 34 AND utenti.Age < 45 THEN
-        UPDATE utenti SET Age_groups = "35-44";
-    ELSEIF utenti.Age > 44 AND utenti.Age < 55 THEN
-        UPDATE utenti SET Age_groups = "45-54";
+    IF NEW.Age < 18 THEN 
+        SET NEW.Age_groups = 'under 18';
+    ELSEIF NEW.Age >= 18 AND NEW.Age < 25 THEN
+        SET NEW.Age_groups = '18-24';
+    ELSEIF NEW.Age >= 25 AND NEW.Age < 35 THEN 
+        SET NEW.Age_groups = '25-34';
+    ELSEIF NEW.Age >= 35 AND NEW.Age < 45 THEN
+        SET NEW.Age_groups = '35-44';
+    ELSEIF NEW.Age >= 45 AND NEW.Age < 55 THEN
+        SET NEW.Age_groups = '45-54';
     ELSE
-        UPDATE utenti SET Age_groups = "over 55";
+        SET NEW.Age_groups = 'over 55';
     END IF;
 END;
 """
+
 trigger2= """
 CREATE TRIGGER Average_rating
 AFTER INSERT 
@@ -95,4 +94,4 @@ END;
 
 
 execute_query(connection, trigger1)
-# execute_query(connection, trigger2)
+execute_query(connection, trigger2)

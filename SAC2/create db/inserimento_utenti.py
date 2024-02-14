@@ -17,7 +17,7 @@ for x in df.to_dict(orient="records"):
 
 c = create_db_connection('daitv12')
 q = f"""INSERT INTO utenti(UserID,Gender,Age,CAP,Province,Work) VALUES(%s,%s,%s,%s,%s,%s)"""
-print(lista[0])
+
 
 execute_many_query(c,q,lista)
 
