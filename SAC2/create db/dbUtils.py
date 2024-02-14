@@ -62,6 +62,23 @@ def execute_query(connection, query, mu=False): #
     finally:
         cursor.close()
 
+def execute_query2(connection, query, mu=False): #
+    cursor = connection.cursor()
+    try:
+        if mu:
+            if len(query) == 0: return
+            for x in query:
+                cursor.execute(x)
+        else:
+            print(query)
+            cursor.execute(query)#,multi=mu
+
+    except Error as err:
+        print(f"Failed query: '{query}'")
+        print(f"Error: '{err}'")
+    finally:
+        cursor.close()
+
 def read_query(connection, query:str, dic = True):
     cursor = connection.cursor(dictionary=dic)
     result = None
