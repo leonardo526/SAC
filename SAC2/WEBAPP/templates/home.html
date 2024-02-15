@@ -4,6 +4,9 @@
     h1{
 text-align: center;
 }
+img {
+
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -30,35 +33,68 @@ text-align: center;
     </div>
   </div>
 </nav>
-    <div class="container mt-5 text-center">
-        <h1 class="mb-5">Benvenuto in DAITATV!</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card" style="width: 18rem;">
+  <img src="https://static.hollywoodreporter.com/sites/default/files/2015/02/pulp_fiction_a_h.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Tutti i Film</h5>
+    <p class="card-text">Ti mostriamo tutti i film disponibili e le valutazioni degli utenti</p>
+    <a href="/film" class="btn btn-primary">mostra</a>
+  </div>
+</div>
+  </div>
+  <div class="col">
+    <div class="card" style="width: 18rem;">
+  <img src="https://herothemovie.com/wp-content/uploads/sites/428/2018/09/iStock-639582276.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Tutti i Generi</h5>
+    <p class="card-text">Ti mostriamo tutti i generi dei film disponibili</p>
+    <a href="/generi" class="btn btn-primary">mostra</a>
+  </div>
+</div>
+  </div>
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+  <img src="https://sfondo.info/i/original/4/e/0/16504.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">I Nostri Grafici</h5>
+    <p class="card-text">Ti mostriamo le nostre dashboard aggiornate</p>
+    <a href="/grafici" class="btn btn-primary">mostra</a>
+  </div>
+</div>
+  </div>
+</div>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="test">
-                    {{ messages[0] }}
-                </div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                </button>
-            {% endif %}
-        {% endwith %}
-<div class="d-grid gap-2 col-6 mx-auto mb-5">
-            <a href="/film" class="btn btn-success btn-lg btn-block" type="button">Mostra film</a>
-        </div>
-        <div class="d-grid gap-2 col-6 mx-auto mb-5">
-            <a href="/author" class="btn btn-warning btn-lg btn-block" type="button">Mostra Autori</a>
-        </div>
-        <div class="d-grid gap-2 col-6 mx-auto mb-5">
-            <a href="/loans" class="btn btn-primary btn-lg btn-block" type="button">Visualizza Prestiti</a>
-        </div>
-    </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function chiudiAlert(button) {
-            var alert = button.closest('.alert');
-            alert.style.display = 'none';
-        }
-    </script>
+<!--    <div class="container mt-5 text-center">-->
+<!--        <h1 class="mb-5">Benvenuto in DAITATV!</h1>-->
+
+<!--        {% with messages = get_flashed_messages() %}-->
+<!--            {% if messages %}-->
+<!--                <div class="alert alert-success alert-dismissible fade show" role="alert" id="test">-->
+<!--                    {{ messages[0] }}-->
+<!--                </div>-->
+<!--                <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            {% endif %}-->
+<!--        {% endwith %}-->
+<!--<div class="d-grid gap-2 col-6 mx-auto mb-5">-->
+<!--            <a href="/film" class="btn btn-success btn-lg btn-block" type="button">Mostra film</a>-->
+<!--        </div>-->
+<!--        <div class="d-grid gap-2 col-6 mx-auto mb-5">-->
+<!--            <a href="/author" class="btn btn-warning btn-lg btn-block" type="button">Mostra Autori</a>-->
+<!--        </div>-->
+<!--        <div class="d-grid gap-2 col-6 mx-auto mb-5">-->
+<!--            <a href="/loans" class="btn btn-primary btn-lg btn-block" type="button">Visualizza Prestiti</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--    <script>-->
+<!--        function chiudiAlert(button) {-->
+<!--            var alert = button.closest('.alert');-->
+<!--            alert.style.display = 'none';-->
+<!--        }-->
+<!--    </script>-->
 </body>
 </html>
