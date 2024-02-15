@@ -23,6 +23,7 @@
 </nav>
 <h1>Top 10 film</h1>
 
+
             <div class="row mr-4 ml-4">
             {% for film in topdieci %}
 
@@ -40,7 +41,11 @@
               {% endfor %}
             </div>
  <h1>Tutti i film</h1>
-
+            <div>
+                <button type="button" class="btn btn-primary"><a href="/film?param_ord=az">Ordina da A a Z</a></button>
+                <button type="button" class="btn btn-primary"><a href="/film?param_ord=4_stelle">migliori film</a></button>
+                 <button type="button" class="btn btn-primary"><a href="/film=">tutti i film</a></button>
+            </div>
             <div class="row mr-4 ml-4">
             {% for film in films %}
 

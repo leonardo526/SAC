@@ -10,11 +10,20 @@ dbname = "museo"
 # --FILM--
 @apiBlueprint.route('/api/getFilm', methods=['GET'])
 def getMovies():
+
     page = int(request.args.get('page', default=1))
     items_per_page = 20
     offset = (page - 1) * items_per_page
     c = create_db_connection("daitv12")
     q = f"SELECT * FROM film LIMIT {items_per_page} OFFSET {offset};"
+    res = read_query(c, q)
+    c.close()
+    return res
+
+@apiBlueprint.route('/api/get_evaluation', methods=['GET'])
+def get_evaluation():
+    c = create_db_connection("daitv12")
+    q = "SELECT * FROM film WHERE Average_rating > 4"
     res = read_query(c, q)
     c.close()
     return res

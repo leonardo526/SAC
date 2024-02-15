@@ -13,6 +13,7 @@ def home():
 
 @app.route('/film')
 def show_film():
+    param_ord = request.args.get('param_ord')
     page = int(request.args.get('page', default=1))
     items_per_page = 20
     c = create_db_connection("daitv12")
@@ -20,6 +21,12 @@ def show_film():
     conteggio = read_query(c, query)[0]['num_film']
     totale = (conteggio // items_per_page) + 1
     data = getMovies()
+    if param_ord == "az":
+        data = data.sort(lambda x: x["Title"])
+    elif param_ord == "4_stelle":
+        data = get_evaluation()
+
+
     top_diesci = Top10Film()
     return render_template('Film.html', films=data, topdieci=top_diesci, page=page, total_pages=totale)
 
@@ -38,11 +45,6 @@ def show_generi():
 @app.route('/grafici')
 def showGrafici():
     return render_template('Grafici.html')
-
-
-
-
-
 
 
 
