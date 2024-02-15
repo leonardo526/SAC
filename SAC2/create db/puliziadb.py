@@ -2,7 +2,7 @@ import pandas as pd
 import re
 def statsInvertiti(titolo):
     tlow = titolo.lower()
-    listArt = ['The','A',"Il","Le","La","Der","An", "I"]
+    listArt = ['The','A',"Il","Le","La","Der","An", "I","Les"]
     for x in listArt:
         if re.search( fr"\b{x.lower()}\b\s$",tlow, re.IGNORECASE) :
             titolo = f"{x} " + re.sub(fr"\b{x.lower()}\b\s$", "",tlow)
@@ -45,11 +45,4 @@ if __name__ == '__main__':
     res['Title'] = res['Title'].map(lambda x: statsInvertiti(x))
     res['Original Title'] = res['Original Title'].map(lambda x: statsInvertiti(x))
     res['Original Title'] = res['Original Title'].map(lambda x: x.replace("a.k.a.", ""))
-    res.to_csv("New_Elenco_Movies_Pulito.csv", index=False)
-
-
-
-
-
-
     res.to_csv("New_Elenco_Movies_Pulito.csv", index=False)

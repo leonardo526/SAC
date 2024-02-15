@@ -5,9 +5,7 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.append('create db')
 from query import Querys 
-import matplotlib.pyplot as plt
 import folium
-import geopandas
 
 
 def grafico1():
@@ -19,6 +17,7 @@ def grafico1():
     sns.set_style("whitegrid")
     sns.lineplot(x='Year', y='FilmCount', data=df)
     plt.show()
+#grafico1()
 
 def grafico2():
     q = Querys('sacDB')
@@ -57,9 +56,7 @@ def grafico4():
     gdf.plot(column='UserCount', cmap='RdYlGn', legend=True)
     #TODO maybe folium pe fallo piu carino
     plt.show()
-    
-
-grafico4()
+#grafico4()
 
 def grafico5():
     q = Querys('sacDB')
@@ -73,6 +70,4 @@ def grafico5():
     plt.pie(df['UserCount'],  labels = df['Work'], colors = colors, autopct='%.0f%%')
     plt.legend(bbox_to_anchor=(1.1, 1), loc='upper left')
     plt.show()
-    
-
-#grafico5()
+grafico5()
