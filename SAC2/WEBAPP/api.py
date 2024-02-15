@@ -1,11 +1,41 @@
-
 from flask import Blueprint, request  # nome db: museo
 from dbUtils import *
 from importDati import mainInsert
 
 apiBlueprint = Blueprint("apiBlueprint", __name__)
 dbname = "museo"
+# --FILM--
+@apiBlueprint.route('/api/getFilm', methods=['GET'])
+def getMovies():
+    page = int(request.args.get('page', default=1))
+    items_per_page = 20
+    offset = (page - 1) * items_per_page
+    c = create_db_connection("daitv12")
+    q = f"SELECT * FROM film LIMIT {items_per_page} OFFSET {offset};"
+    res = read_query(c, q)
+    c.close()
+    return res
 
+@apiBlueprint.route('/api/getFilmTop10', methods=['GET'])
+def Top10Film():
+    c = create_db_connection("daitv12")
+    q = "SELECT * FROM film ORDER BY Average_rating DESC LIMIT 10"
+    res = read_query(c, q)
+    c.close()
+    return res
+
+
+# --GENERI--
+@apiBlueprint.route('/api/getGeneri', methods=['GET'])
+def getGeneri():
+    page = int(request.args.get('page', default=1))
+    items_per_page = 10
+    offset = (page - 1) * items_per_page
+    c = create_db_connection("daitv12")
+    q = f"SELECT * FROM generi LIMIT {items_per_page} OFFSET {offset};"
+    res = read_query(c, q)
+    c.close()
+    return res
 
 # --OPERE--
 @apiBlueprint.route('/api/getOpere', methods=['GET'])
