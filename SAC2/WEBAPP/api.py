@@ -1,6 +1,9 @@
-from flask import Blueprint, request  # nome db: museo
-from dbUtils import *
-from importDati import mainInsert
+from flask import Blueprint, request
+from sys import path
+path.append(r'C:\Users\Utente\PycharmProjects\pythonProjectSql\SAC\SAC2\create db')
+from SAC.SAC2.MongoDB.dbUtils import *
+
+
 
 apiBlueprint = Blueprint("apiBlueprint", __name__)
 dbname = "museo"

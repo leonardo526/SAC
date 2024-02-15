@@ -2,9 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Film</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">DAITV12</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link" href="/film">Tutti i Film</a>
+        <a class="nav-link" href="/generi">Tutti i Generi</a>
+        <a class="nav-link" href="/grafici">Grafici</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<h1>Top 10 film</h1>
+
+            <div class="row mr-4 ml-4">
+            {% for film in topdieci %}
+
+                <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center mb-2">
+                <div class="card mt-3 " style="width: 20rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ film['Title'] }}</h5>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Anno di pubblicazione: {{ film['Year'] }}</li>
+                    <li class="list-group-item">Voto medio: {{ film['Average_rating'] }}</li>
+                  </ul>
+                </div>
+                </div>
+              {% endfor %}
+            </div>
+ <h1>Tutti i film</h1>
+
+            <div class="row mr-4 ml-4">
+            {% for film in films %}
+
+                <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center mb-2">
+                <div class="card mt-3 " style="width: 20rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ film['Title'] }}</h5>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Anno di pubblicazione: {{ film['Year'] }}</li>
+                    <li class="list-group-item">Voto medio: {{ film['Average_rating'] }}</li>
+                  </ul>
+                </div>
+                </div>
+              {% endfor %}
+            </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+    {% if page > 1 %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('show_film', page=page-1) }}">Previous</a></li>
+    {% endif %}
+    {% for num in range(1, total_pages + 1) %}
+        {% if num == page %}
+            <li class="page-item"><a class="page-link" href="#"><strong>{{ num }}</strong></a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('show_film', page=num) }}">{{ num }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if page < total_pages %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('show_film', page=page+1) }}">Next</a></li>
+    {% endif %}
+    </ul>
+</nav>
 
 </body>
 </html>
