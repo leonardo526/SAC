@@ -6,7 +6,7 @@ from SAC.SAC2.MongoDB.dbUtils import *
 
 
 apiBlueprint = Blueprint("apiBlueprint", __name__)
-dbname = "museo"
+
 # --FILM--
 @apiBlueprint.route('/api/getFilm', methods=['GET'])
 def getMovies():
@@ -36,6 +36,11 @@ def Top10Film():
     c.close()
     return res
 
+@apiBlueprint.route('/api/getMovieByGenre', methods=['GET'])
+def getMovieByGenre():
+    genere = request.args.get('genere')
+    c = create_db_connection("daitv12")
+    q = f"""SELECT * FROM film JOIN generirel JOIN generi ON film.FilmID = generirel.FilmID AND generirel.GenreID = generi.GenreID WHERE generi.Genere = "{genere}"; """
 
 # --GENERI--
 @apiBlueprint.route('/api/getGeneri', methods=['GET'])

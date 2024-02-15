@@ -9,14 +9,23 @@ from dbUtils import *
 """
 df_film = pd.read_csv(r'C:\Users\Utente\PycharmProjects\pythonProjectSql\SAC\SAC2\create db\New_Elenco_Movies_Pulito.csv')
 df_rating = pd.read_csv(r'C:\Users\Utente\PycharmProjects\pythonProjectSql\SAC\SAC2\create db\ratings_edit.csv')
-df_film_rating = pd.merge(df_film, df_rating['Rating'], on='MovieID', how='left')
+df_film_rating = pd.merge(df_film, df_rating, on='MovieID', how='left')
 df_film_rating['Rating'] = df_film_rating['Rating'].groupby('MovieID')['Rating'].transform(lambda x: statistics.mean(x))
+df_film_rating['UserID'] = df_film_rating['UserID'].groupby('MovieID')['UserID'].transform(lambda x: ', '.join(x))
+df_film_rating['Timestamp'] = df_film_rating['Timestamp'].groupby('MovieID')['Timestamp'].transform(lambda x: ', '.join(x))
+df_film_rating.drop_duplicates()
+df_film_rating['Genres'] = df_film_rating['Genres'].apply(lambda x: x.split('|'))
 df_utenti = pd.read_csv(r'C:\Users\Utente\PycharmProjects\pythonProjectSql\SAC\SAC2\create db\users_edit.csv')
-df_utenti_rating = pd.merge(df_utenti,df_rating['Rating'], on='UserID', how='left')
+df_utenti_rating = pd.merge(df_utenti,df_rating, on='UserID', how='left')
 df_utenti_rating['Rating'] = df_utenti_rating['Rating'].groupby('UserID')['Rating'].transform(lambda x: ', '.join(x))
+df_utenti_rating['MovieID'] = df_utenti_rating['MovieID'].groupby('UserID')['MovieID'].transform(lambda x: ', '.join(x))
+df_utenti_rating['Timestamp'] = df_utenti_rating['Timestamp'].groupby('UserID')['Timestamp'].transform(lambda x: ', '.join(x))
+df_utenti_rating.drop_duplicates()
 
 film_dict = df_film_rating.to_dict(orient='records')
 utenti_dict = df_utenti_rating.to_dict(orient='records')
+print(film_dict[0:10])
+print((utenti_dict[0:10]))
 # conString = "mongodb://localhost:27017"
 #
 # client = MongoClient(conString)
