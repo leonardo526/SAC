@@ -1,35 +1,26 @@
-import pymysql
 from pymongo import MongoClient
+from dbUtils import *
+conString = "mongodb://localhost:27017"
 
-# Connessione al database MySQL
-mysql_connection = pymysql.connect(
-    host='localhost',
-    user='username',
-    password='password',
-    database='daitv12'
-)
+client = MongoClient(conString)
+daitv12 = client.daitv12
+film = daitv12.film
+generi = daitv12.generi
+utenti = daitv12.utenti
+generirel = daitv12.generirel
+rating = daitv12.rating
 
-# Connessione al database MongoDB
-mongo_client = MongoClient('mongodb://localhost:27017/')
-mongo_db = mongo_client['daitatv']
-mongo_collection = mongo_db['queries']
+c = create_db_connection("daitv12")
+lista_film = read_query(c,"SELECT * FROM film")
+lista_generi = read_query(c, "SELECT * FROM generi")
+lista_utenti = read_query(c, "SELECT * FROM utenti")
+lista_generi_rel = read_query(c, "SELECT * FROM generirel")
+lista_rating = read_query(c, "SELECT * FROM rating")
 
-try:
-    with mysql_connection.cursor() as cursor:
-        # Esempio di query per selezionare dati da una tabella MySQL
-        sql_query = """SELECT generi.Genere, COUNT(generirel.FilmID) FROM `generi`
-                    JOIN generirel ON generi.GenreID = generirel.GenreID
-                    GROUP BY generirel.GenreID;"""
+film.insert_many(lista_film)
+generi.insert_many(lista_generi)
+utenti.insert_many(lista_utenti)
+generirel.insert_many(lista_generi_rel)
+rating.insert_many(lista_rating)
 
-        cursor.execute(sql_query)
-        result = cursor.fetchall()
-
-        # Inserimento dei dati nella collezione MongoDB
-        for row in result:
-           mongo_collection.insert_one(row)
-
-    print("Dati inseriti con successo in MongoDB")
-
-finally:
-    mysql_connection.close()
-    mongo_client.close()
+client.close()
