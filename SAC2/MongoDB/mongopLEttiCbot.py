@@ -1,5 +1,12 @@
 from pymongo import MongoClient
 from dbUtils import *
+""" 
+sys.path.append('create db')
+from dbUtils import *
+# prima non funzionava perche non c'era un file __init__.py in create db  
+"""
+
+
 conString = "mongodb://localhost:27017"
 
 client = MongoClient(conString)
