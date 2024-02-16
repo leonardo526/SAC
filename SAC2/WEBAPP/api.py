@@ -3,7 +3,7 @@ from sys import path
 path.append('create db')
 from dbUtils import *
 
-DBNAME = "daitv12"
+DBNAME = "sacDB"
 
 apiBlueprint = Blueprint("apiBlueprint", __name__)
 

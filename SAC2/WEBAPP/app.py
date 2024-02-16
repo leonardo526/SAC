@@ -4,7 +4,7 @@ from api import *
 
 app = Flask(__name__)
 app.register_blueprint(apiBlueprint)
-DBNAME = "daitv12"
+DBNAME = "sacDB"
 
 @app.route('/')
 def home():
