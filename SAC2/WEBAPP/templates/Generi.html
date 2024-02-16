@@ -2,9 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAITV12 - Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #cfe2d4;
+            color: #333;
+            font-family: 'Georgia', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            position: relative;
+            background-image: url('https://img.freepik.com/free-photo/view-3d-cinema-theatre-room_23-2151067053.jpg?t=st=1708013105~exp=1708016705~hmac=5e1a721f6b9f73f844c70abaf4a18e2ee6c79635c36b64bd2c1058795d53781e&w=900');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid #6ca577;
+        }
+
+        .navbar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 1;
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #333; /* Nero */
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .nav-link:hover {
+            color: #4b7b4c;
+        }
+
+        .card {
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #6ca577, #4b7b4c);
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            border-radius: 20px 20px 0 0;
+            z-index: 1;
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-text {
+            color: #f5f5f5;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-custom {
+            background-color: #6ca577;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 1;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.05);
+            background-color: #4b7b4c;
+        }
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">DAITV12</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link" href="/film">Tutti i Film</a>
+        <a class="nav-link" href="/generi">Tutti i Generi</a>
+        <a class="nav-link" href="/grafici">Grafici</a>
+      </div>
+    </div>
+  </div>
+</nav>
 <h1>Tutti i generi</h1>
 
             <div class="row mr-4 ml-4">
@@ -15,10 +137,14 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ genere['Genere'] }}</h5>
                   </div>
+                    <div class="d-flex justify-content-around mb-4 mt-1">
+                    <a href="/film?genere={{ genere['Genere'] }}"><button class="btn btn-primary">Mostra film</button></a>
+                </div>
+                </div>
+                </div>
 
-                </div>
-                </div>
-                <nav aria-label="Page navigation example">
+            {% endfor %}
+<nav aria-label="Page navigation example">
     <ul class="pagination">
     {% if page > 1 %}
         <li class="page-item"><a class="page-link" href="{{ url_for('show_generi', page=page-1) }}">Previous</a></li>
