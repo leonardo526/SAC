@@ -4,7 +4,7 @@ from api import *
 
 app = Flask(__name__)
 app.register_blueprint(apiBlueprint)
-
+DBNAME = "daitv12"
 
 @app.route('/')
 def home():
@@ -16,7 +16,7 @@ def show_film():
     param_ord = request.args.get('param_ord')
     page = int(request.args.get('page', default=1))
     items_per_page = 20
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     query = "SELECT COUNT(*) AS num_film FROM film"
     conteggio = read_query(c, query)[0]['num_film']
     totale = (conteggio // items_per_page) + 1
@@ -40,7 +40,7 @@ def show_film():
 def show_generi():
     page = int(request.args.get('page', default=1))
     items_per_page = 10
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     query = "SELECT COUNT(*) AS num_generi FROM generi"
     conteggio = read_query(c, query)[0]['num_generi']
     totale = (conteggio // items_per_page) + 1

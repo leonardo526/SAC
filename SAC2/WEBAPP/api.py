@@ -3,7 +3,7 @@ from sys import path
 path.append('create db')
 from dbUtils import *
 
-
+DBNAME = "daitv12"
 
 apiBlueprint = Blueprint("apiBlueprint", __name__)
 
@@ -13,7 +13,7 @@ def getMovies():
     page = int(request.args.get('page', default=1))
     items_per_page = 20
     offset = (page - 1) * items_per_page
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     print(c)
     q = f"SELECT * FROM film LIMIT {items_per_page} OFFSET {offset};"
     res = read_query(c, q)
@@ -22,7 +22,7 @@ def getMovies():
 
 @apiBlueprint.route('/api/get_evaluation', methods=['GET'])
 def get_evaluation():
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     q = "SELECT * FROM film WHERE Average_rating > 4"
     res = read_query(c, q)
     c.close()
@@ -30,7 +30,7 @@ def get_evaluation():
 
 @apiBlueprint.route('/api/getFilmTop10', methods=['GET'])
 def Top10Film():
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     q = "SELECT * FROM film ORDER BY Average_rating DESC LIMIT 10"
     res = read_query(c, q)
     c.close()
@@ -39,7 +39,7 @@ def Top10Film():
 @apiBlueprint.route('/api/getMovieByGenre', methods=['GET'])
 def getMovieByGenre():
     genere = request.args.get('genere')
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     q = f"""SELECT * FROM film JOIN generirel JOIN generi ON film.FilmID = generirel.FilmID AND generirel.GenreID = generi.GenreID WHERE generi.Genere = "{genere}"; """
     res = read_query(c, q)
     c.close()
@@ -51,7 +51,7 @@ def getGeneri():
     page = int(request.args.get('page', default=1))
     items_per_page = 10
     offset = (page - 1) * items_per_page
-    c = create_db_connection("daitv12")
+    c = create_db_connection(DBNAME)
     q = f"SELECT * FROM generi LIMIT {items_per_page} OFFSET {offset};"
     res = read_query(c, q)
     c.close()

@@ -11,6 +11,7 @@ h = os.getenv('H')
 def create_server_connection():
     connection = None
     try:
+        print(h,id,psw)
         connection = mysql.connector.connect(
             host=h,
             user=id,
@@ -33,6 +34,7 @@ def create_database(connection, query):
 def create_db_connection(dbn):
     connection = None
     try:
+        print(h,id,psw,dbn)
         connection = mysql.connector.connect(
             host=h,
             user=id,
