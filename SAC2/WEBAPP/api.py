@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from sys import path
-path.append(r'C:\Users\Utente\PycharmProjects\pythonProjectSql\SAC\SAC2\create db')
-from SAC.SAC2.MongoDB.dbUtils import *
+path.append('create db')
+from dbUtils import *
 
 
 

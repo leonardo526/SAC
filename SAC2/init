@@ -1,0 +1,24 @@
+1) descrizione dettagliata del prodotto realizzato (nel nostro caso del processo di creazione del db e degli step che abbiamo individuato)
+-qua si puo segui il report
+
+
+
+
+2) Descrizione delle modalità tecniche di realizzazione dello stesso (sia in back che in front-end)
+-Abbiamo utilizato python per la pulizia dei dati, creazione database e inserimento dati con sql, utilizzando Flask insieme ad html e css abbiamo fatto il frontend seguindo il pattern MVC, PowerQuery/PowerBi e python(matplotlib) per i grafici, e mongoDB per un secondo database.
+
+
+
+3) descrizione delle modalità di coordinamento utilizzate dal team 
+
+
+
+
+4) Descrizione degli strumenti di co-progettazione utilizzati 
+
+
+
+
+
+5) le maggiori difficoltà incontrate e le soluzioni raggiunte. 
+
