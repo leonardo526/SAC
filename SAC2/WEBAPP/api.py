@@ -22,8 +22,11 @@ def getMovies():
 
 @apiBlueprint.route('/api/get_evaluation', methods=['GET'])
 def get_evaluation():
+    page = int(request.args.get('page', default=1))
+    items_per_page = 20
+    offset = (page - 1) * items_per_page
     c = create_db_connection(DBNAME)
-    q = "SELECT * FROM film WHERE Average_rating > 4"
+    q = f"SELECT * FROM film WHERE Average_rating > 4 ORDER BY Average_rating DESC LIMIT {items_per_page} OFFSET {offset};"
     res = read_query(c, q)
     c.close()
     return res
