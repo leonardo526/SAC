@@ -132,16 +132,16 @@
     </div>
   </div>
 </nav>
-<h1 class="mt-3 mb-3">Top 10 film</h1>
+<h1 class="mt-3 mb-3"><b>Top 10 film</b></h1>
 
 
             <div class="row mr-4 ml-4">
             {% for film in topdieci %}
 
                 <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center mb-4">
-                <div class="card mt-3 " style="width: 20rem;">
+                <div class="card mt-1 " style="width: 20rem;">
                   <div class="card-body">
-                    <h5 class="card-title">{{ film['Title'] }}</h5>
+                    <h4 class="card-title">{{ film['Title'] }}</h4>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Anno di pubblicazione: {{ film['Year'] }}</li>
@@ -151,7 +151,7 @@
                 </div>
               {% endfor %}
             </div>
-            <h1 class="mt-4 mb-3">Tutti i film</h1>
+            <h1 class="mt-4 mb-3"><b>Tutti i film</b></h1>
             <div class="mb-4">
                 <button type="button"  class="btn btn-primary"><a href="/film?param_ord=az">Ordina da A a Z</a></button>
                 <button type="button" class="btn btn-primary"><a href="/film?param_ord=4_stelle">migliori film</a></button>

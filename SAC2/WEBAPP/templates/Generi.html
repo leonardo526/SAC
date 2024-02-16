@@ -118,15 +118,15 @@
     </div>
   </div>
 </nav>
-<h1 class="mt-3 mb-3">Tutti i generi</h1>
-
-            <div class="row mr-4 ml-4">
+<h1 class="mt-3 mb-3"><b>Tutti i generi</b></h1>
+<div class="d-flex justify-content-center align-items-center ">
+            <div class="row mr-4 ml-4 ">
             {% for genere in generi %}
 
             <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
-                <div class="card mt-3 text-center" style="width: 20rem;">
+                <div class="card mt-3 text-center" >
                     <div class="card-body">
-                        <h5 class="card-title">{{ genere['Genere'] }}</h5>
+                        <h3 class="card-title">{{ genere['Genere'] }}</h3>
                     </div>
                     <div class="mb-4 mt-1">
                         <a href="/film?genere={{ genere['Genere'] }}">
@@ -138,6 +138,7 @@
 
             {% endfor %}
             </div>
+</div>
 <nav aria-label="Page navigation example">
     <ul class="pagination mt-5">
     {% if page > 1 %}
