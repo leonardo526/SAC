@@ -10,11 +10,11 @@ apiBlueprint = Blueprint("apiBlueprint", __name__)
 # --FILM--
 @apiBlueprint.route('/api/getFilm', methods=['GET'])
 def getMovies():
-
     page = int(request.args.get('page', default=1))
     items_per_page = 20
     offset = (page - 1) * items_per_page
     c = create_db_connection("daitv12")
+    print(c)
     q = f"SELECT * FROM film LIMIT {items_per_page} OFFSET {offset};"
     res = read_query(c, q)
     c.close()

@@ -20,7 +20,7 @@ def show_film():
     query = "SELECT COUNT(*) AS num_film FROM film"
     conteggio = read_query(c, query)[0]['num_film']
     totale = (conteggio // items_per_page) + 1
-    genere = request.args.get('genere')
+    genere = request.args.get('genere', default=None)
     if genere:
         if isinstance(genere, str):
             data = getMovieByGenre()
@@ -28,10 +28,10 @@ def show_film():
             raise TypeError("Il genere deve essere una stringa")
     else:
         data = getMovies()
-    if param_ord == "az":
-        data = data.sort(lambda x: x["Title"])
-    elif param_ord == "4_stelle":
-        data = get_evaluation()
+        if param_ord == "az":
+            data = data.sort(lambda x: x["Title"])
+        elif param_ord == "4_stelle":
+            data = get_evaluation()
     top_diesci = Top10Film()
     return render_template('Film.html', films=data, topdieci=top_diesci, page=page, total_pages=totale)
 
